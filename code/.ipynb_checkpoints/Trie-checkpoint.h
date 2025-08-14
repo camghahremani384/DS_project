@@ -6,30 +6,49 @@
 #include <vector>
 using namespace std;
 
-struct trie_node {
-    int data;
-    trie_node* left;
-    trie_node* right;
+class Trie_Node {
+public:
+    Trie_Node* children[28];
+    
+    Trie_Node();
+
+    string currString;
+    
+    vector<int> childNodes; // keep track of child nodes
 };
 
 class Trie {
 public:
-    // constructor initializes class variables and pointers
-    // set root to null
+    // initialize the root Trie_Node and set children to nullptrs
     Trie();
     
     // deconstructor - use to clean up memory
     ~Trie();
     
-    // initializes trie node and returns a pointer to it. gives two null children
-    trie_node* init_node(char data);
+    //returns index of character
+    int getIndex(char c);
 
-    // traverses the trie and assigns the new node to the new character
-    void insert(trie_node* new_node);
+    // traverses the trie and assigns the string
+    void insert(string word);
     
+    // returns true/false if string is in the trie
+    bool search(string word);
+    
+    // recursive helper for removal 
+    bool removeRecursive(Trie_Node* node, string word, int charIndex);
+    // removes the word from the trie
+    bool remove(string word);
+    
+    void treeTraverse(vector<string>& stringVec, Trie_Node* startNode);
+    
+    // store and print specific subTree
+    vector<string> getTree(Trie_Node* startNode);
+    
+    // get specific tree (a, b, c, etc)
+    vector<string> getSpecificTree(string prompt);
 private:
-    // double pointer always will point to the root pointer of the trie
-    trie_node** root;
+    //for access to the root of the trie
+    Trie_Node* root;
 };
 
 #endif // TRIE_H__
