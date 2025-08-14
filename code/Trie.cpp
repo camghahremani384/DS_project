@@ -25,6 +25,8 @@ int Trie::getIndex(char c) {
         index = (ascii - 65) + 1;
     } else if (ascii == 32) {
         index = 27;
+    } else {
+        return -1;
     }
     return index;
 }
@@ -37,7 +39,10 @@ void Trie::insert(string word) {
     for (char c : word) {
         c = toupper(c);
         int index = getIndex(c);
-
+        if (index == -1) {
+            cout << "please don't add any special characters to the name" << endl;
+            return;
+        }
         if (!currNode->children[index]) {
             currNode->children[index] = new Trie_Node();
             currNode->childNodes.push_back(index);
@@ -56,6 +61,10 @@ bool Trie::search(string word) {
     Trie_Node* currNode = root;
     for (char c: word) {
         int index = getIndex(c);
+        if (index == -1) {
+            cout << "Please do not use any special characters" << endl;
+            return false;
+        }
         if (!currNode->children[index]) {
             return false;
         }
@@ -79,6 +88,10 @@ bool Trie::removeRecursive(Trie_Node* node, string word, int charIndex) {
         return false; // string not found
     }
     int index = getIndex(word[charIndex]);
+    if (index == -1) {
+        cout << "please do not use any special characters" << endl;
+        return false;
+    }
     if (!node->children[index]) {
         return false;
     }
@@ -130,6 +143,10 @@ vector<string> Trie::getSpecificTree(string prompt) {
     for (char c : prompt) {
         c = toupper(c);
         int index = getIndex(c);
+        if (index == -1) {
+            cout << "please do not use any special characters" << endl;
+            return {};
+        }
         cout << c << endl;
         cout << index << endl;
         cout << "Looking for index: " << index << " in children of currNode" << endl;
