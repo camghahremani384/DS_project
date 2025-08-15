@@ -147,9 +147,6 @@ vector<string> Trie::getSpecificTree(string prompt) {
             cout << "please do not use any special characters" << endl;
             return {};
         }
-        cout << c << endl;
-        cout << index << endl;
-        cout << "Looking for index: " << index << " in children of currNode" << endl;
         if (!currNode->children[index]) {
             cout << "index wasn't found!" << endl;
             return {};
