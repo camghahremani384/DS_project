@@ -133,7 +133,7 @@ void useTrie(int choice, Trie& myTrie) {
         cout << "What name would you like to delete from the contact list: ";
         getline(cin, name);
         toUpper(name);
-        bool foundDeleted = myTrie.remove(name);
+        bool foundDeleted = myTrie.removeName(name);
         if (foundDeleted) {
             cout << "successfully found and deleted name!" << endl;
         } else {
@@ -155,7 +155,9 @@ void useTrie(int choice, Trie& myTrie) {
         cout << endl;
         cout << endl;
     } else if (choice == 6) {
+        cout << "getting list" << endl;
         vector<string> updatedList = myTrie.getSpecificTree("");
+        cout << "exporting list" << endl;
         exportList(updatedList);
         cout << endl;
         cout << endl;

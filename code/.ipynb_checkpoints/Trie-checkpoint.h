@@ -25,6 +25,9 @@ public:
     // deconstructor - use to clean up memory
     ~Trie();
     
+    // helper function for deleting and resizing vector 
+    void resizeVec(int index, vector<int>& cNodes);
+    
     //returns index of character
     int getIndex(char c);
 
@@ -37,7 +40,7 @@ public:
     // recursive helper for removal 
     bool removeRecursive(Trie_Node* node, string word, int charIndex);
     // removes the word from the trie
-    bool remove(string word);
+    bool removeName(string word);
     
     void treeTraverse(vector<string>& stringVec, Trie_Node* startNode);
     
